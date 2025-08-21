@@ -6,6 +6,9 @@ import io.javalin.Javalin;
 import com.revature.controller.AuthenticationController;
 import com.revature.controller.IngredientController;
 
+//TO-DO: i added this
+import io.javalin.http.staticfiles.Location;
+
 
 /**
  * The JavalinAppUtil class is responsible for setting up and configuring 
@@ -67,7 +70,10 @@ public class JavalinAppUtil {
 
             });
 
-            
+            //TO-DO: i also added this
+            config.staticFiles.add("/public", Location.CLASSPATH);
+
+
         });
 
 

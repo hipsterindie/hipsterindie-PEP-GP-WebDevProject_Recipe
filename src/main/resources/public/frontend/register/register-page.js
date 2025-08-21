@@ -45,8 +45,20 @@ registerButton.onclick = processRegistration;
 async function processRegistration() {
     // Implement registration logic here
 
+    //validating all fields are filled
+    if(usernameInput.value === ''){ alert("username must have a value!"); }
+    if(emailInput.value === ''){ alert("email must have a value!"); }
+    if(passwordInput.value === ''){ alert("password must have a value!"); }
+    if(repeatPasswordInput.value === ''){ alert("repeated password must have a value!"); }
+    
+    //check password and repeat password match
+    if(passwordInput.value !== repeatPasswordInput.value){ alert("password and repeated password do not match!") }
+
     // Example placeholder:
-    // const registerBody = { username, email, password };
+    const registerBody = { username: usernameInput.value, email: emailInput.value, password: passwordInput.value };
+
+    console.log(registerBody);
+
 const requestOptions = {
         method: "POST",
         mode: "cors",
@@ -61,5 +73,10 @@ const requestOptions = {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(registerBody)
     };
-    // await fetch(...)
+    
+    const response = await fetch(`${BASE_URL}/register`, requestOptions);
+
+    if(response.status == 201){response.redirect(BASE_URL+'/login');}
+
+    //todo...
 }
