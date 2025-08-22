@@ -109,8 +109,8 @@ async function processRegistration() {
         }
     } catch (error){
 
-        console.error("An error occured during registration", error);   //for dev
-        alert("Registration failed due to an error. Try again");        //for user
+        //console.error("An error occured during registration", error);   //for dev
+        //alert("Registration failed due to an error. Try again");        //for user
 
     }
 
