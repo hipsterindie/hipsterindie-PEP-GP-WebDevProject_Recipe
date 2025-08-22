@@ -2,7 +2,10 @@
  * This script handles the login functionality for the Recipe Management Application.
  * It manages user authentication by sending login requests to the server and handling responses.
 */
-const BASE_URL = "http://localhost:8081"; // backend URL
+//const BASE_URL = "http://localhost:8081"; // backend URL
+
+const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+
 
 /* 
  * TODO: Get references to DOM elements

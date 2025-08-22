@@ -35,7 +35,7 @@ The backend runs on: `http://localhost:8081/`
 
 ---
 
-### 1️⃣ User Registration
+### 1️⃣ User Registration (DONE)
 
 📂 Location: `frontend/register/`
 

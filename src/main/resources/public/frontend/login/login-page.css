@@ -17,6 +17,13 @@
     padding: 0;
 }
 
+form{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    justify-content: center;
+    margin:auto;
+}
 
 body {
     margin: 2px;
@@ -31,15 +38,34 @@ h1 {
     margin-bottom: 20px;
 }
 
+h1#main-heading{
+    margin:auto;
+    text-align: center;
+}
+
 h2 {
     margin-top: 20px;
 }
 
 textarea, input {
-    width: 30%;
+    width: 10%;
     min-width: 200px;
 }
 
 textarea {
     height: 50px;
+}
+
+button{
+    width: 150px;
+    height: 50px;
+    margin: 10px auto;
+    justify-content: center;
+    text-align: center;
+}
+
+button#login-button{
+    
+    display:block;
+
 }
