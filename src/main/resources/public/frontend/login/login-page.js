@@ -96,20 +96,21 @@ async function processLogin() {
         // - Split the string into token and isAdmin flag
         // - Store both in sessionStorage using sessionStorage.setItem()
 
+        //alert("Response from server was: " + loginResponse.status);
+
+
         if(loginResponse.status == 200){
             var ResponseString = loginResponse.text();
             var [token, isAdmin] = (await ResponseString).split(' ');
-            sessionStorage.setItem(token, token);
-            sessionStorage.setItem(isAdmin, isAdmin);
+            sessionStorage.setItem("token", token);
+            sessionStorage.setItem("isAdmin", isAdmin);
             // TODO: Optionally show the logout button if applicable
     
             
             
             // TODO: Add a small delay (e.g., 500ms) using setTimeout before redirecting
             // - Use window.location.href to redirect to the recipe page
-            setTimeout(()=>{
-                window.location.href = `${BASE_URL}/frontend/recipe/recipe-page.html`;
-            },500);
+            setTimeout(() => {window.location.href = `${BASE_URL}/frontend/recipe/recipe-page.html`},500);
             
             
         }
