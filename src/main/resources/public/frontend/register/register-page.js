@@ -6,6 +6,8 @@
 
 const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
 
+https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io/frontend/register/register-page.html
+
 /* 
  * TODO: Get references to various DOM elements
  * - usernameInput, emailInput, passwordInput, repeatPasswordInput, registerButton
@@ -20,8 +22,6 @@ var registerButton = document.getElementById("register-button");
  * TODO: Ensure the register button calls processRegistration when clicked
  */
 registerButton.onclick = processRegistration;
-
-console.log("hi");
 
 /**
  * TODO: Process Registration Function
@@ -96,6 +96,7 @@ async function processRegistration() {
         */
         const initResponse = await fetch(`${BASE_URL}/register`, requestOptions);
 
+        //if the validRegistrationTest() fails, go to the PORTS tab, and set 8081 to be made public
         if(initResponse.status == 201){ 
             window.location.href = `${BASE_URL}/frontend/login/login-page.html`;    
         }
@@ -109,8 +110,8 @@ async function processRegistration() {
         }
     } catch (error){
 
-        //console.error("An error occured during registration", error);   //for dev
-        //alert("Registration failed due to an error. Try again");        //for user
+        console.error("An error occured during registration", error);   //for dev
+        alert("Registration failed due to an error. Try again");        //for user
 
     }
 
