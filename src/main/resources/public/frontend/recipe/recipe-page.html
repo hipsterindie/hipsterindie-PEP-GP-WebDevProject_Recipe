@@ -16,10 +16,10 @@
 <body>
 
     <!-- TODO: Add a hidden link with id="admin-link" to navigate to the ingredients page (admin only) -->
-    <a href="/frontend/ingredients/ingredient-page.html" id="admin-link">admins only</a>
+    <a href="/frontend/ingredients/ingredient-page.html" id="admin-link" hidden>admins only</a>
     <!-- TODO: Add a hidden Logout button with id="logout-button" -->
     <br>
-    <button type="button" id="logout-button">Logout</button>
+    <button type="button" id="logout-button" hidden>Logout</button>
     <!-- TODO: Add an h1 heading for the Recipe Management section -->
     <br> 
     <h1>Recipe Management Section</h1>
@@ -31,6 +31,9 @@
         - Add input with id="search-input"
         - Add button with id="search-button" and text "Search"
     -->
+    <h2>Search a Recipe</h2>
+    <input type="text" id="search-input"/>
+    <button type="button" id="search-button">Search</button>
 
 
     <!-- 📋 Recipe List -->
@@ -39,6 +42,8 @@
         - Create a <ul> to hold all recipes
         - Give it id="recipe-list"
     -->
+    <ul id="recipe-list">
+    </ul>
 
 
     <!-- ➕ Add a Recipe -->
@@ -49,6 +54,10 @@
         - Textarea for instructions (id="add-recipe-instructions-input")
         - Button to submit (id="add-recipe-submit-input") with text "Add Recipe"
     -->
+    <h2>Add a Recipe</h2>
+    <input type="text" id="add-recipe-name-input"/>
+    <textarea id="add-recipe-instructions-input"></textarea>
+    <button type="button" id="add-recipe-submit-input">Add Recipe</button>
 
 
     <!-- ✏️ Update a Recipe -->
@@ -59,6 +68,11 @@
         - Textarea for updated instructions (id="update-recipe-instructions-input")
         - Button (id="update-recipe-submit-input") with text "Update Recipe"
     -->
+    <h2>Update a Recipe</h2>
+    <input type="text" id="update-recipe-name-input"/>
+    <textarea id="update-recipe-instructions-input"></textarea>
+    <button id="update-recipe-submit-input">Update Recipe</button>
+
 
 
     <!-- ❌ Delete a Recipe -->
@@ -68,6 +82,10 @@
         - Input with id="delete-recipe-name-input"
         - Button with id="delete-recipe-submit-input" and text "Delete Recipe"
     -->
+    <h2>Delete a Recipe</h2>
+    <input type="text" id="delete-recipe-name-input" />
+    <button type="button" id="delete-recipe-submit-input">Delete Recipe</button>
+
 
     <script src="recipe-page.js"></script>
 </body>
