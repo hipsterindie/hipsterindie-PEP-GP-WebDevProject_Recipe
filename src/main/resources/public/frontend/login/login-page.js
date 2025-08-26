@@ -102,8 +102,8 @@ async function processLogin() {
         if(loginResponse.status == 200){
             var ResponseString = loginResponse.text();
             var [token, isAdmin] = (await ResponseString).split(' ');
-            sessionStorage.setItem("auth-token", token);
-            sessionStorage.setItem("is-admin", isAdmin);
+            sessionStorage.setItem("token", token);
+            sessionStorage.setItem("isAdmin", isAdmin);
             // TODO: Optionally show the logout button if applicable
     
             

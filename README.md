@@ -58,7 +58,7 @@ Files:
 
 ---
 
-### 2️⃣ User Login and Logout (DONE)
+### 2️⃣ User Login and Logout
 
 📂 Location: `frontend/login/` and `frontend/recipe/`
 
@@ -99,7 +99,7 @@ Files:
 
 **Requirements:**
 
-#### HTML (DONE)
+#### HTML
 
 - Add the following elements:
   - Add Recipe: name input, instructions input, add button (`add-recipe-submit-input`)

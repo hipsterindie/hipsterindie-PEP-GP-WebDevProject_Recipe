@@ -13,76 +13,34 @@ let recipes = [];
 window.addEventListener("DOMContentLoaded", () => {
 
     /* 
-     * DONE: Get references to various DOM elements
+     * TODO: Get references to various DOM elements
      * - Recipe name and instructions fields (add, update, delete)
      * - Recipe list container
      * - Admin link and logout button
      * - Search input
     */
-   
-    //Recipe name & instructions fields:
-    addNameInput = document.getElementById("add-recipe-name-input");
-    addInstructionsInput = document.getElementById("add-recipe-instructions-input");
-    addButton = document.getElementById("add-recipe-submit-input");
-
-    updateNameInput = document.getElementById("update-recipe-name-input");
-    updateInstructionsInput = document.getElementById("update-recipe-instructions-input");
-    updateButton = document.getElementById("update-recipe-submit-input");
-
-    deleteNameInput = document.getElementById("delete-recipe-name-input");
-    deleteButton = document.getElementById("delete-recipe-submit-input");
-
-    //Recipe list container:
-    listRecipe = document.getElementById("recipe-list");
-
-    //Admin link & logout button:
-    adminLink = document.getElementById("admin-link");
-    logoutButton = document.getElementById("logout-button");
-   
-    //Recipe Search:
-    searchInput = document.getElementById("search-input");
-    searchButton = document.getElementById("search-button");
-
 
     /*
-     * DONE: Show logout button if auth-token exists in sessionStorage
+     * TODO: Show logout button if auth-token exists in sessionStorage
      */
 
-    if(sessionStorage.getItem("auth-token")){
-        logoutButton.hidden= false;
-    }
-    else{
-        logoutButton.hidden= true;
-    }
-
     /*
-     * DONE: Show admin link if is-admin flag in sessionStorage is "true"
+     * TODO: Show admin link if is-admin flag in sessionStorage is "true"
      */
 
-    displayAdminLink();
-
-
-
-
     /*
-     * DONE: Attach event handlers
+     * TODO: Attach event handlers
      * - Add recipe button → addRecipe()
      * - Update recipe button → updateRecipe()
      * - Delete recipe button → deleteRecipe()
      * - Search button → searchRecipes()
      * - Logout button → processLogout()
      */
-    
-    addButton.onclick = addRecipe;
-    updateButton.onclick = updateRecipe;
-    deleteButton = deleteRecipe;
-    searchButton = searchRecipes;
-    logoutButton.onclick = processLogout;
 
     /*
-     * DONE: On page load, call getRecipes() to populate the list
+     * TODO: On page load, call getRecipes() to populate the list
      */
-    getRecipes();
+
 
     /**
      * TODO: Search Recipes Function
@@ -93,41 +51,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function searchRecipes() {
         // Implement search logic here
-        var name = searchInput.value;
-        
-        const queryParam = new URLSearchParams({name:name});
-
-        const requestOptions = {
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "*",
-                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
-
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        };
-
-        try{
-            const searchResponse = await fetch(`${BASE_URL}/recipes?${queryParam}`);  //search for recipe by name
-
-            //todo... stuff
-
-
-
-            //refresh list
-            refreshRecipeList();
-
-        }
-        catch(error){
-            console.log("TO-DO: ",error);
-        }
-
     }
 
     /**
@@ -185,20 +108,8 @@ window.addEventListener("DOMContentLoaded", () => {
         // Implement refresh logic here
     }
 
-    function displayAdminLink(){
-        
-        if(sessionStorage.getItem("is-admin")){
-            adminLink.hidden= false;
-
-        }
-        else{
-            adminLink.hidden=true;
-        }
-
-    }
-
     /**
-     * DONE: Logout Function
+     * TODO: Logout Function
      * - Send POST request to /logout
      * - Use Bearer token from sessionStorage
      * - On success: clear sessionStorage and redirect to login
@@ -206,47 +117,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function processLogout() {
         // Implement logout logic here
-
-            const tokenBearer = sessionStorage.getItem("auth-token");
-
-            const requestOptions = {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "*",
-                "Authorization": `Bearer ${tokenBearer}`
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        };
-
-        try{
-
-            const logoutResponse = await fetch(`${BASE_URL}/logout`, requestOptions);
-
-            //DEBUG
-            //console.log("logoutResponse: ", logoutResponse);
-
-            if(logoutResponse.status == 200){
-                sessionStorage.clear();
-                setTimeout( ()=>{window.location.href=`${BASE_URL}/frontend/login/login-page.html`} ,500);
-            }
-            else{
-                alert("error status: ", logoutResponse.status,"\ntry to logout again!");
-            }
-
-
-        }
-        catch(error){
-
-            console.log("error occurred during logout: ", error);
-            alert("error! try to logout again: \n", error);
-        }
-
     }
 
 });
