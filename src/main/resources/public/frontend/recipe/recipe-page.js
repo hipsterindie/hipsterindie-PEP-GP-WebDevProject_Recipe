@@ -62,8 +62,6 @@ window.addEventListener("DOMContentLoaded", () => {
     displayAdminLink();
 
 
-
-
     /*
      * DONE: Attach event handlers
      * - Add recipe button → addRecipe()
@@ -75,8 +73,8 @@ window.addEventListener("DOMContentLoaded", () => {
     
     addButton.onclick = addRecipe;
     updateButton.onclick = updateRecipe;
-    deleteButton = deleteRecipe;
-    searchButton = searchRecipes;
+    deleteButton.onclick = deleteRecipe;
+    searchButton.onclick = searchRecipes;
     logoutButton.onclick = processLogout;
 
     /*
@@ -92,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
      * - Handle fetch errors and alert user
      */
     async function searchRecipes() {
-        // Implement search logic here
+
         var name = searchInput.value;
         
         const queryParam = new URLSearchParams({name:name});
@@ -114,14 +112,18 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try{
-            const searchResponse = await fetch(`${BASE_URL}/recipes?${queryParam}`);  //search for recipe by name
+            const searchResponse = await fetch(`${BASE_URL}/recipes?${queryParam}`, requestOptions);  //search for recipe by name
 
-            //todo... stuff
+            //debug
+            console.log(searchResponse);
 
-
-
-            //refresh list
-            refreshRecipeList();
+            if(searchResponse.status == 200){
+                //refresh list
+                refreshRecipeList();
+            }
+            else if(searchResponse.status == 404){
+                alert("error! recipes not found!");
+            }
 
         }
         catch(error){
@@ -139,7 +141,66 @@ window.addEventListener("DOMContentLoaded", () => {
      * - On success: clear inputs, fetch latest recipes, refresh the list
      */
     async function addRecipe() {
-        // Implement add logic here
+        
+        var errors = [];
+
+        var recipeName = addNameInput.value;
+
+        var recipeInstruct = addInstructionsInput.value;
+
+        if(recipeName == ''){errors.push("No Recipe Name provided");}
+
+        if(recipeInstruct == ''){errors.push("No Recipe Instructions provided");}
+
+        if(errors.length>0){
+            errors = errors.join("\n");
+            alert(errors);
+            return;
+        }
+
+        const requestBody = { name:recipeName, instructions:recipeInstruct }
+
+        const requestOptions = {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify(requestBody)
+        };
+
+        try{
+            const addResponse = await fetch(`${BASE_URL}/recipes`, requestOptions);  //search for recipe by name
+
+            console.log(sessionStorage.getItem("auth-token"));
+
+            //debug
+            console.log(addResponse);
+
+            if(addResponse.status == 201){
+                //clear inputs:
+                addNameInput.value = "";
+                addInstructionsInput.value = "";
+
+                //fetch latest recipes
+
+                //refresh list:
+                refreshRecipeList();
+            }
+
+        }
+        catch(error){
+            console.log("TO-DO: ",error);
+        }
+
     }
 
     /**
@@ -166,23 +227,92 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     /**
-     * TODO: Get Recipes Function
+     * DONE: Get Recipes Function
      * - Fetch all recipes from backend
      * - Store in recipes array
      * - Call refreshRecipeList() to display
      */
     async function getRecipes() {
-        // Implement get logic here
+
+        const requestOptions = {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer"
+        };
+
+        try{
+            const getResponse = await fetch(`${BASE_URL}/recipes`, requestOptions);  //get all recipes
+
+            //debug
+            //console.log(sessionStorage.getItem("auth-token"));
+
+            //debug
+            //console.log(getResponse);
+
+            if(getResponse.status == 200){
+
+                //clear recipes before appending
+                recipes = [];
+
+                var gottenRecipes = await getResponse.json();
+                
+                //debug
+                //console.log("debug: ", gottenRecipes);
+
+                for(recipe of gottenRecipes){
+                    recipes.push( { name:recipe.name, instructions:recipe.instructions} ); //push name + instruct ONLY
+                }
+
+                //debug
+                //console.log(recipes);
+
+                //refresh list:
+                refreshRecipeList();
+            }
+
+        }
+        catch(error){
+            console.log("TO-DO: ",error);
+        }
+
+
+
     }
 
     /**
-     * TODO: Refresh Recipe List Function
+     * DONE: Refresh Recipe List Function
      * - Clear current list in DOM
      * - Create <li> elements for each recipe with name + instructions
      * - Append to list container
      */
     function refreshRecipeList() {
-        // Implement refresh logic here
+        
+        //clear DOM list
+        while(listRecipe.firstChild){
+            listRecipe.removeChild(listRecipe.firstChild);
+        }
+
+        //create <li> elements
+        for(element of recipes){
+            var recipe = document.createElement('li');
+            
+            recipe.textContent = "Name: " + element.name + ", Instructions: " + element.instructions; 
+
+            //append <li> elements to <ul>
+            listRecipe.appendChild(recipe);
+        }
+
+        
     }
 
     function displayAdminLink(){
@@ -205,7 +335,6 @@ window.addEventListener("DOMContentLoaded", () => {
      * - On failure: alert the user
      */
     async function processLogout() {
-        // Implement logout logic here
 
             const tokenBearer = sessionStorage.getItem("auth-token");
 

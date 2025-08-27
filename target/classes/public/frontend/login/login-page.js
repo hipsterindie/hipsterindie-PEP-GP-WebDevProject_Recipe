@@ -57,7 +57,7 @@ async function processLogin() {
     var username = usernameInput.value;
     var password = passwordInput.value;
 
-    if(username == ''){errors.push("Username must not be empty.")}
+    if(username == ''){errors.push("Username must not be empty.");}
     if(password == ''){errors.push("Password must not be empty");}
 
     if(errors.length>0){
@@ -102,8 +102,8 @@ async function processLogin() {
         if(loginResponse.status == 200){
             var ResponseString = loginResponse.text();
             var [token, isAdmin] = (await ResponseString).split(' ');
-            sessionStorage.setItem("token", token);
-            sessionStorage.setItem("isAdmin", isAdmin);
+            sessionStorage.setItem("auth-token", token);
+            sessionStorage.setItem("is-admin", isAdmin);
             // TODO: Optionally show the logout button if applicable
     
             

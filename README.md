@@ -111,16 +111,16 @@ Files:
 
 #### JavaScript
 
-- On page load, call:
+- On page load, call: (DONE)
 
   - `getRecipes()` to load all recipes
   - `displayAdminLink()` to toggle admin section visibility
 
 - Implement:
-  - `addRecipe()`: POST `/recipes` with name + instructions
-  - `updateRecipe()`: PUT `/recipes/{id}` with new instructions
-  - `deleteRecipe()`: DELETE `/recipes/{id}`
-  - `searchRecipes()`: filter recipes locally based on name
+  - `addRecipe()`: POST `/recipes` with name + instructions       DONE
+  - `updateRecipe()`: PUT `/recipes/{id}` with new instructions   TODO
+  - `deleteRecipe()`: DELETE `/recipes/{id}`                      TODO
+  - `searchRecipes()`: filter recipes locally based on name       DONE
   - All requests must use:
     ```javascript
     headers: {

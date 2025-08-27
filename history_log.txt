@@ -1,9 +1,7 @@
-commit d5880ca0614c9e196829888d19931ce1301abdfd
+commit a8900bc59d215e4090882ea1000db237fd88da7c
 Author: David Kosa <hipsterindiegarbage@gmail.com>
-Date:   Wed Aug 27 02:34:24 2025 +0000
+Date:   Wed Aug 27 02:39:15 2025 +0000
 
-    Revert "Commit #7 - User Story #3 in progress. Work on recipe-page.js to perform searchs, updates, deletes, etc."
-    
-    This reverts commit 9ccfb35a71f80657334d749bf33768b3a6b95d0d.
+    Commit #7 - Messed up a 'git revert' command, restoring previous progress.
 
- 11 files changed, 221 insertions(+), 60 deletions(-)
+ 8 files changed, 321 insertions(+), 25 deletions(-)
