@@ -2,7 +2,10 @@
  * This script defines the CRUD operations for Recipe objects in the Recipe Management Application.
  */
 
-const BASE_URL = "http://localhost:8081"; // backend URL
+//const BASE_URL = "http://localhost:8081"; // backend URL
+
+const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+
 
 let recipes = [];
 

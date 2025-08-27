@@ -28,7 +28,7 @@ body {
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin:auto;
 }
 
 h2 {
@@ -43,3 +43,4 @@ textarea, input {
 textarea {
     height: 50px;
 }
+

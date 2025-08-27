@@ -2,7 +2,11 @@
  * This script defines the registration functionality for the Registration page in the Recipe Management Application.
  */
 
-const BASE_URL = "http://localhost:8081"; // backend URL
+//const BASE_URL = "http://localhost:8081"; // backend URL
+
+const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+
+https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io/frontend/register/register-page.html
 
 /* 
  * TODO: Get references to various DOM elements
@@ -45,21 +49,70 @@ registerButton.onclick = processRegistration;
 async function processRegistration() {
     // Implement registration logic here
 
-    // Example placeholder:
-    // const registerBody = { username, email, password };
-const requestOptions = {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "*"
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(registerBody)
-    };
-    // await fetch(...)
+    const errors = []
+
+    //validating all fields are filled
+    if(usernameInput.value === ''){ errors.push("username must have a value!"); }
+    if(emailInput.value === ''){ errors.push("email must have a value!"); }
+    if(passwordInput.value === ''){ errors.push("password must have a value!"); }
+    if(repeatPasswordInput.value === ''){ errors.push("repeated password must have a value!"); }
+    
+    //check password and repeat password match
+    if(passwordInput.value !== repeatPasswordInput.value){ errors.push("password and repeated password do not match!") }
+
+    //if any validations fail, do not continue with registering, and send an alert to the user.
+    if(errors.length > 0){
+        alert(errors.join('\n'));
+        return;
+    }
+
+    try {
+        // Example placeholder:
+        const registerBody = {username: usernameInput.value, email: emailInput.value, password: passwordInput.value };
+
+        const requestOptions = {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*"
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify(registerBody)
+        };
+
+
+        /* 
+        * - If status is 201:
+        *      - Redirect user to login page
+        * - If status is 409:
+        *      - Alert that user/email already exists (in the backend, we only check if the username is taken when registering...)
+        * - Otherwise:
+        *      - Alert generic registration error 
+        */
+        const initResponse = await fetch(`${BASE_URL}/register`, requestOptions);
+
+        //if the validRegistrationTest() fails, go to the PORTS tab, and set 8081 to be made public
+        if(initResponse.status == 201){ 
+            window.location.href = `${BASE_URL}/frontend/login/login-page.html`;    
+        }
+        else if(initResponse.status == 409){
+
+
+            alert("user/email already exists...", initResponse.json());
+        }
+        else{
+            alert("generic registration error", initResponse.json());
+        }
+    } catch (error){
+
+        console.error("An error occured during registration", error);   //for dev
+        alert("Registration failed due to an error. Try again");        //for user
+
+    }
+
 }
