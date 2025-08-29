@@ -95,7 +95,7 @@ async function processRegistration() {
             body: JSON.stringify(registerBody)
         };
 
-
+        
         /* 
         * - If status is 201:
         *      - Redirect user to login page
@@ -104,11 +104,13 @@ async function processRegistration() {
         * - Otherwise:
         *      - Alert generic registration error 
         */
-        const initResponse = await fetch(`${BASE_URL}/register`, requestOptions);
+       const initResponse = await fetch(`${BASE_URL}/register`, requestOptions);
+       
+       //alert("hi");
 
-        // //debug
-        // console.log("registration response:", initResponse);
-
+       // //debug
+       console.log("registration response:", initResponse);
+       
         //if the validRegistrationTest() fails, go to the PORTS tab, and set 8081 to be made public
         if(initResponse.status == 201){ 
             window.location.href = `${BASE_URL}/frontend/login/login-page.html`;    
@@ -125,7 +127,7 @@ async function processRegistration() {
     } catch (error){
 
         console.error("An error occured during registration", error);   //for dev
-        alert("Registration failed due to an error. Try again");        //for user
+        alert("Registration failed due to an error. Try again", error.message);        //for user
 
     }
 

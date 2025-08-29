@@ -24,17 +24,17 @@ window.addEventListener("DOMContentLoaded", () => {
     addNameInput = document.getElementById("add-recipe-name-input");
     addInstructionsInput = document.getElementById("add-recipe-instructions-input");
     addButton = document.getElementById("add-recipe-submit-input");
-
+   
     updateNameInput = document.getElementById("update-recipe-name-input");
     updateInstructionsInput = document.getElementById("update-recipe-instructions-input");
     updateButton = document.getElementById("update-recipe-submit-input");
-
+   
     deleteNameInput = document.getElementById("delete-recipe-name-input");
     deleteButton = document.getElementById("delete-recipe-submit-input");
-
+   
     //Recipe list container:
     listRecipe = document.getElementById("recipe-list");
-
+   
     //Admin link & logout button:
     adminLink = document.getElementById("admin-link");
     logoutButton = document.getElementById("logout-button");
@@ -42,13 +42,13 @@ window.addEventListener("DOMContentLoaded", () => {
     //Recipe Search:
     searchInput = document.getElementById("search-input");
     searchButton = document.getElementById("search-button");
-
-
-    /*
-     * DONE: Show logout button if auth-token exists in sessionStorage
-     */
-
+   
+   
+   /*
+   * DONE: Show logout button if auth-token exists in sessionStorage
+   */
     displayLogoutButton();
+  
 
 
     /*
@@ -148,6 +148,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function addRecipe() {
         
+        
         //parse html input
         var recipeName = addNameInput.value.trim();
         var recipeInstruct = addInstructionsInput.value.trim();
@@ -155,18 +156,18 @@ window.addEventListener("DOMContentLoaded", () => {
         //Handle input validation
         var errors = [];
         if(recipeName == ''){errors.push("No Recipe Name provided");}
-
+        
         if(recipeInstruct == ''){errors.push("No Recipe Instructions provided");}
-
+        
         if(errors.length>0){
             errors = errors.join("\n");
             alert(errors);
             return;
         }
-
+        
         //Setup fetch request (add recipe/instructions to database)
         const requestBody = { name:recipeName, instructions:recipeInstruct }
-
+        
         const requestOptions = {
             method: "POST",
             mode: "cors",
@@ -177,27 +178,31 @@ window.addEventListener("DOMContentLoaded", () => {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "*",
                 "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
-
+                
             },
             redirect: "follow",
             referrerPolicy: "no-referrer",
             body: JSON.stringify(requestBody)
         };
-
+        
         try{
             //add recipe to database
             const addResponse = await fetch(`${BASE_URL}/recipes`, requestOptions);  
-    
+            
             //debug            
             //console.log(sessionStorage.getItem("auth-token"));
-
+            
             //debug
             //console.log(addResponse);
-
+            
+            //alert(addResponse.json()[0].name);
+            
             if(addResponse.status == 201){
+                alert('hi');
                 //clear inputs:
                 addNameInput.value = "";
                 addInstructionsInput.value = "";
+
 
                 //fetch latest recipes & refresh list:
                 getRecipes();
@@ -472,7 +477,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 for(recipe of gottenRecipes){
                     recipes.push( { name:recipe.name, instructions:recipe.instructions} ); //push name + instruct ONLY
                 }
-
+                
                 //refresh list:
                 refreshRecipeList();
             }

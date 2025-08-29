@@ -21,10 +21,10 @@ public class AppLauncher {
 
     public static void main(String[] args) {
 
-        int port = 8081; // default port
+        //int port = 8081; // default port
 
         
-        Javalin app = Main.main(new String[]{});
+        //Javalin app = Main.main(new String[]{});
         //app.start(port);
     
     }
