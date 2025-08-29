@@ -406,13 +406,18 @@ window.addEventListener("DOMContentLoaded", () => {
                 //send DELETE request to update recipe by ID
                 const deleteResponse = await fetch(`${BASE_URL}/recipes/${singleRecipe[0].id}`, deleteRequestOptions);
 
-                if(deleteResponse.status == 401){
+                if(deleteResponse.ok){
+                    //fetch latest recipes & refresh list
+                    await getRecipes();
+                }
+                else if(deleteResponse.status == 401){
                     alert("Unauthorized user! Cannot delete unless you're an admin");
-                    
+
+                }
+                else{
+                    alert("could not delete for unknown reasons.");
                 }
 
-                //fetch latest recipes & refresh list
-                getRecipes();
                 
             }
             else if(findResponse.status == 200 && foundRecipes.length>1){
@@ -437,7 +442,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         catch(error){
             console.error("ERROR WHEN DELETING RECIPES: ",error);
-            alert("ERROR WHEN DELETING");
+            //alert("ERROR WHEN DELETING");
         }
 
 
@@ -509,9 +514,10 @@ window.addEventListener("DOMContentLoaded", () => {
     function refreshRecipeList() {
         
         //clear DOM list
-        while(listRecipe.firstChild){
-            listRecipe.removeChild(listRecipe.firstChild);
-        }
+        // while(listRecipe.firstChild){
+        //     listRecipe.removeChild(listRecipe.firstChild);
+        // }
+        listRecipe.innerHTML = '';
 
         //create <li> elements of each recipe stored in recipes Array
         for(element of recipes){
@@ -579,7 +585,6 @@ window.addEventListener("DOMContentLoaded", () => {
         try{
 
             const logoutResponse = await fetch(`${BASE_URL}/logout`, requestOptions);
-
             
             if(logoutResponse.status == 200){   //successful logout:
                 sessionStorage.clear();
@@ -594,7 +599,7 @@ window.addEventListener("DOMContentLoaded", () => {
         catch(error){
 
             console.error("error occurred during logout: ", error);
-            alert("error! try to logout again: \n", error);
+            //alert("error! try to logout again: \n", error);
         }
 
     }

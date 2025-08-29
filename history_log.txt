@@ -1,7 +1,7 @@
-commit 955ef8d089d9ce31665fee685d3c8042a8d27095
+commit a3218f50d366414d3769cca4b19c129069459f5b
 Author: David Kosa <hipsterindiegarbage@gmail.com>
-Date:   Fri Aug 29 05:02:15 2025 +0000
+Date:   Fri Aug 29 15:25:25 2025 +0000
 
-    Commit #10 - Slowly fixing the testing bugs. when running tests, use localhost:8081 as the base url.
+    Commit #11 - All tests pass when run all at once, except 'deleterecipeDeleteTest()' and 'addingredientPostTest()'. In process of debugging.
 
- 9 files changed, 72 insertions(+), 57 deletions(-)
+ 18 files changed, 64 insertions(+), 52 deletions(-)

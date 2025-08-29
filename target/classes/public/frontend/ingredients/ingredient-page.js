@@ -291,9 +291,10 @@ async function deleteIngredient() {
  */
 function refreshIngredientList() {
     //clear DOM list
-    while(ingredientListContainer.firstChild){
-        ingredientListContainer.removeChild(ingredientListContainer.firstChild);
-    }
+    // while(ingredientListContainer.firstChild){
+    //     ingredientListContainer.removeChild(ingredientListContainer.firstChild);
+    // }
+    ingredientListContainer.innerHTML='';
 
     //create <li> elements of each recipe stored in ingredients Array
     for(element of ingredients){
