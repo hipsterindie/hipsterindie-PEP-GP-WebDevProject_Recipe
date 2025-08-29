@@ -118,7 +118,7 @@ Files:
 
 - Implement:
   - `addRecipe()`: POST `/recipes` with name + instructions       DONE
-  - `updateRecipe()`: PUT `/recipes/{id}` with new instructions   TODO
+  - `updateRecipe()`: PUT `/recipes/{id}` with new instructions   DONE
   - `deleteRecipe()`: DELETE `/recipes/{id}`                      TODO
   - `searchRecipes()`: filter recipes locally based on name       DONE
   - All requests must use:
@@ -131,7 +131,7 @@ Files:
 
 ---
 
-### 4️⃣ Ingredient Management (Admin Only)
+### 4️⃣ Ingredient Management (Admin Only) (DONE)
 
 📂 Location: `frontend/ingredients/`
 
@@ -142,14 +142,14 @@ Files:
 
 **Requirements:**
 
-#### HTML
+#### HTML (DONE)
 
 - Add:
   - Add Ingredient: name input + button
   - Delete Ingredient: name input + button
   - Ingredient list container (ID: `ingredient-list`)
 
-#### JavaScript
+#### JavaScript (DONE)
 
 - On page load, call `getIngredients()`
 - Implement:

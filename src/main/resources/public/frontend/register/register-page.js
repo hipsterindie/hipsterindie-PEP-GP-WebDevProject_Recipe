@@ -2,11 +2,10 @@
  * This script defines the registration functionality for the Registration page in the Recipe Management Application.
  */
 
-//const BASE_URL = "http://localhost:8081"; // backend URL
+const BASE_URL = "http://localhost:8081"; // backend URL
 
-const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+//const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
 
-https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io/frontend/register/register-page.html
 
 /* 
  * TODO: Get references to various DOM elements
@@ -17,6 +16,9 @@ var emailInput = document.getElementById("email-input");
 var passwordInput = document.getElementById("password-input");
 var repeatPasswordInput = document.getElementById("repeat-password-input");
 var registerButton = document.getElementById("register-button");
+
+//optional admin checkbox
+var adminCheck = document.getElementById("admin-check");
 
 /* 
  * TODO: Ensure the register button calls processRegistration when clicked
@@ -52,10 +54,10 @@ async function processRegistration() {
     const errors = []
 
     //validating all fields are filled
-    if(usernameInput.value === ''){ errors.push("username must have a value!"); }
-    if(emailInput.value === ''){ errors.push("email must have a value!"); }
-    if(passwordInput.value === ''){ errors.push("password must have a value!"); }
-    if(repeatPasswordInput.value === ''){ errors.push("repeated password must have a value!"); }
+    if(usernameInput.value.trim() === ''){ errors.push("username must have a value!"); }
+    if(emailInput.value.trim() === ''){ errors.push("email must have a value!"); }
+    if(passwordInput.value.trim() === ''){ errors.push("password must have a value!"); }
+    if(repeatPasswordInput.value.trim() === ''){ errors.push("repeated password must have a value!"); }
     
     //check password and repeat password match
     if(passwordInput.value !== repeatPasswordInput.value){ errors.push("password and repeated password do not match!") }
@@ -66,9 +68,17 @@ async function processRegistration() {
         return;
     }
 
+
     try {
+
+        // //debug
+        // console.log("value:",adminCheck.checked);  
+
         // Example placeholder:
-        const registerBody = {username: usernameInput.value, email: emailInput.value, password: passwordInput.value };
+        const registerBody = {username: usernameInput.value.trim(), email: emailInput.value.trim(), password: passwordInput.value.trim(), admin: adminCheck.checked};
+
+        // //debug
+        // console.log("registerBody:", registerBody);
 
         const requestOptions = {
             method: "POST",
@@ -96,6 +106,9 @@ async function processRegistration() {
         */
         const initResponse = await fetch(`${BASE_URL}/register`, requestOptions);
 
+        // //debug
+        // console.log("registration response:", initResponse);
+
         //if the validRegistrationTest() fails, go to the PORTS tab, and set 8081 to be made public
         if(initResponse.status == 201){ 
             window.location.href = `${BASE_URL}/frontend/login/login-page.html`;    
@@ -103,10 +116,11 @@ async function processRegistration() {
         else if(initResponse.status == 409){
 
 
-            alert("user/email already exists...", initResponse.json());
+            alert("user/email already exists...", await initResponse.text());
         }
         else{
-            alert("generic registration error", initResponse.json());
+            alert("generic registration error", await initResponse.json());
+            console.error("generic registration error", await initResponse.json());
         }
     } catch (error){
 

@@ -46,7 +46,12 @@ public class AuthenticationController {
      * No modifications or implementations are required.
      */
     public void register(Context ctx) {
+
+        try{
+
         Chef newChef = ctx.bodyAsClass(Chef.class);
+
+        System.out.println("New Chef Registration Attempt:" + newChef.toString());
 
         if (chefService.searchChefs(newChef.getUsername()).stream().anyMatch(c -> c.getUsername().equals(newChef.getUsername()))) {
             ctx.status(409).result("Username already exists");
@@ -55,6 +60,9 @@ public class AuthenticationController {
 
         Chef registeredChef = authService.registerChef(newChef);
         ctx.status(201).json(registeredChef);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
