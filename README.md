@@ -119,7 +119,7 @@ Files:
 - Implement:
   - `addRecipe()`: POST `/recipes` with name + instructions       DONE
   - `updateRecipe()`: PUT `/recipes/{id}` with new instructions   DONE
-  - `deleteRecipe()`: DELETE `/recipes/{id}`                      TODO
+  - `deleteRecipe()`: DELETE `/recipes/{id}`                      DONe
   - `searchRecipes()`: filter recipes locally based on name       DONE
   - All requests must use:
     ```javascript

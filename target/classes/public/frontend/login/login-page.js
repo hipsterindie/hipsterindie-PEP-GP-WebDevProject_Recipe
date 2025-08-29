@@ -109,7 +109,7 @@ async function processLogin() {
             var [token, isAdmin] = (await ResponseString).split(' ');
             sessionStorage.setItem("auth-token", token);
             sessionStorage.setItem("is-admin", isAdmin);
-            // TODO: Optionally show the logout button if applicable
+            // DONE: Optionally show the logout button if applicable
     
             logoutButton.style.visibility = "visible";
             
@@ -137,7 +137,6 @@ async function processLogin() {
         // DONE: Handle any network or unexpected errors
         // - Log the error and alert the user
         console.error("An error occured during login: ", error);
-        alert("there was an error... try again!",error);
     }
     
 }
@@ -188,7 +187,6 @@ async function processLogout() {
     catch(error){
 
         console.error("error occurred during logout: ", error);
-        alert("error! try to logout again: \n", error);
     }
 
 }

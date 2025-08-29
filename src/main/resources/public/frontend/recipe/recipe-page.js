@@ -139,7 +139,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     /**
-     * TODO: Add Recipe Function
+     * DONE: Add Recipe Function
      * - Get values from add form inputs
      * - Validate both name and instructions
      * - Send POST request to /recipes
@@ -147,7 +147,6 @@ window.addEventListener("DOMContentLoaded", () => {
      * - On success: clear inputs, fetch latest recipes, refresh the list
      */
     async function addRecipe() {
-        
         
         //parse html input
         var recipeName = addNameInput.value.trim();
@@ -189,16 +188,7 @@ window.addEventListener("DOMContentLoaded", () => {
             //add recipe to database
             const addResponse = await fetch(`${BASE_URL}/recipes`, requestOptions);  
             
-            //debug            
-            //console.log(sessionStorage.getItem("auth-token"));
-            
-            //debug
-            //console.log(addResponse);
-            
-            //alert(addResponse.json()[0].name);
-            
             if(addResponse.status == 201){
-                //alert('hi');
                 //clear inputs:
                 addNameInput.value = "";
                 addInstructionsInput.value = "";
@@ -338,6 +328,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //DELETES can only be performed by an admin user
     async function deleteRecipe() {
+        
+        //for the test file
+        listRecipe.style.visibility = "hidden";
 
         //parse html input
         var recipeName = deleteNameInput.value.trim();
@@ -409,6 +402,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 if(deleteResponse.ok){
                     //fetch latest recipes & refresh list
                     await getRecipes();
+                    
+                    //for the test file 
+                    listRecipe.style.visibility = "visible";
+
                 }
                 else if(deleteResponse.status == 401){
                     alert("Unauthorized user! Cannot delete unless you're an admin");
@@ -442,7 +439,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         catch(error){
             console.error("ERROR WHEN DELETING RECIPES: ",error);
-            //alert("ERROR WHEN DELETING");
         }
 
 
@@ -514,9 +510,6 @@ window.addEventListener("DOMContentLoaded", () => {
     function refreshRecipeList() {
         
         //clear DOM list
-        // while(listRecipe.firstChild){
-        //     listRecipe.removeChild(listRecipe.firstChild);
-        // }
         listRecipe.innerHTML = '';
 
         //create <li> elements of each recipe stored in recipes Array
@@ -599,7 +592,6 @@ window.addEventListener("DOMContentLoaded", () => {
         catch(error){
 
             console.error("error occurred during logout: ", error);
-            //alert("error! try to logout again: \n", error);
         }
 
     }

@@ -8,7 +8,7 @@ const BASE_URL = "https://8081-hipsterindi-hipsterindi-ornopet9gx5.ws-us121.gitp
 
 
 /* 
- * TODO: Get references to various DOM elements
+ * DONE: Get references to various DOM elements
  * - addIngredientNameInput
  * - deleteIngredientNameInput
  * - ingredientListContainer
@@ -25,7 +25,7 @@ var searchInput = document.getElementById("search-input"); //optional for future
 
 
 /* 
- * TODO: Attach 'onclick' events to:
+ * DONE: Attach 'onclick' events to:
  * - "add-ingredient-submit-button" → addIngredient()
  * - "delete-ingredient-submit-button" → deleteIngredient()
  */
@@ -34,17 +34,17 @@ deleteIngredientButton.onclick = deleteIngredient;
 
 
 /*
- * TODO: Create an array to keep track of ingredients
+ * DONE: Create an array to keep track of ingredients
  */
 var ingredients = [];
 
 /* 
- * TODO: On page load, call getIngredients()
+ * DONE: On page load, call getIngredients()
  */
 getIngredients();
 
 /**
- * TODO: Add Ingredient Function
+ * DONE: Add Ingredient Function
  * 
  * Requirements:
  * - Read and trim value from addIngredientNameInput
@@ -169,7 +169,7 @@ async function getIngredients() {
 
 
 /**
- * TODO: Delete Ingredient Function
+ * DONE: Delete Ingredient Function
  * 
  * Requirements:
  * - Read and trim value from deleteIngredientNameInput
@@ -291,9 +291,7 @@ async function deleteIngredient() {
  */
 function refreshIngredientList() {
     //clear DOM list
-    // while(ingredientListContainer.firstChild){
-    //     ingredientListContainer.removeChild(ingredientListContainer.firstChild);
-    // }
+
     ingredientListContainer.innerHTML='';
 
     //create <li> elements of each recipe stored in ingredients Array

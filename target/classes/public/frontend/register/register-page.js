@@ -8,7 +8,7 @@ const BASE_URL = "https://8081-hipsterindi-hipsterindi-ornopet9gx5.ws-us121.gitp
 
 
 /* 
- * TODO: Get references to various DOM elements
+ * DONE: Get references to various DOM elements
  * - usernameInput, emailInput, passwordInput, repeatPasswordInput, registerButton
  */
 var usernameInput = document.getElementById("username-input");
@@ -21,12 +21,12 @@ var registerButton = document.getElementById("register-button");
 var adminCheck = document.getElementById("admin-check");
 
 /* 
- * TODO: Ensure the register button calls processRegistration when clicked
+ * DONE: Ensure the register button calls processRegistration when clicked
  */
 registerButton.onclick = processRegistration;
 
 /**
- * TODO: Process Registration Function
+ * DONE: Process Registration Function
  * 
  * Requirements:
  * - Retrieve username, email, password, and repeat password from input fields
@@ -71,14 +71,9 @@ async function processRegistration() {
 
     try {
 
-        // //debug
-        // console.log("value:",adminCheck.checked);  
-
         // Example placeholder:
         const registerBody = {username: usernameInput.value.trim(), email: emailInput.value.trim(), password: passwordInput.value.trim(), admin: adminCheck.checked};
 
-        // //debug
-        // console.log("registerBody:", registerBody);
 
         const requestOptions = {
             method: "POST",
@@ -105,18 +100,12 @@ async function processRegistration() {
         *      - Alert generic registration error 
         */
        const initResponse = await fetch(`${BASE_URL}/register`, requestOptions);
-       
-       //alert("hi");
 
-       // //debug
-       console.log("registration response:", initResponse);
-       
         //if the validRegistrationTest() fails, go to the PORTS tab, and set 8081 to be made public
         if(initResponse.status == 201){ 
             window.location.href = `${BASE_URL}/frontend/login/login-page.html`;    
         }
         else if(initResponse.status == 409){
-
 
             alert("user/email already exists...", await initResponse.text());
         }
@@ -127,7 +116,6 @@ async function processRegistration() {
     } catch (error){
 
         console.error("An error occured during registration", error);   //for dev
-        alert("Registration failed due to an error. Try again", error.message);        //for user
 
     }
 
