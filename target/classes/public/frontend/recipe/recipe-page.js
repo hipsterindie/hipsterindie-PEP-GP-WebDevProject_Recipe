@@ -2,9 +2,9 @@
  * This script defines the CRUD operations for Recipe objects in the Recipe Management Application.
  */
 
-const BASE_URL = "http://localhost:8081"; // backend URL
+//const BASE_URL = "http://localhost:8081"; // backend URL
 
-//const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+const BASE_URL = "https://8081-hipsterindi-hipsterindi-ornopet9gx5.ws-us121.gitpod.io"; // test
 
 
 let recipes = [];
@@ -198,7 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
             //alert(addResponse.json()[0].name);
             
             if(addResponse.status == 201){
-                alert('hi');
+                //alert('hi');
                 //clear inputs:
                 addNameInput.value = "";
                 addInstructionsInput.value = "";
@@ -406,6 +406,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 //send DELETE request to update recipe by ID
                 const deleteResponse = await fetch(`${BASE_URL}/recipes/${singleRecipe[0].id}`, deleteRequestOptions);
 
+                if(deleteResponse.status == 401){
+                    alert("Unauthorized user! Cannot delete unless you're an admin");
+                    
+                }
+
                 //fetch latest recipes & refresh list
                 getRecipes();
                 
@@ -432,6 +437,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         catch(error){
             console.error("ERROR WHEN DELETING RECIPES: ",error);
+            alert("ERROR WHEN DELETING");
         }
 
 
@@ -522,12 +528,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function displayAdminLink(){
 
-        if(sessionStorage.getItem("is-admin") == "true"){
-            adminLink.hidden= false;
+        if(sessionStorage.getItem("is-admin") === "true"){
+            adminLink.style.visibility= "visible";
 
         }
         else{
-            adminLink.hidden=true;
+            adminLink.style.visibility="hidden";
         }
 
     }
@@ -535,10 +541,10 @@ window.addEventListener("DOMContentLoaded", () => {
     function displayLogoutButton(){
 
         if(sessionStorage.getItem("auth-token")){
-            logoutButton.hidden= false;
+            logoutButton.style.visibility= "visible";
         }
         else{
-            logoutButton.hidden= true;
+            logoutButton.style.visibility= "hidden";
         }
         
     }
@@ -577,7 +583,7 @@ window.addEventListener("DOMContentLoaded", () => {
             
             if(logoutResponse.status == 200){   //successful logout:
                 sessionStorage.clear();
-                setTimeout( ()=>{window.location.href=`${BASE_URL}/frontend/login/login-page.html`} ,500);
+                setTimeout( ()=>{window.location.href=`../login/login-page.html`} ,500);
             }
             else{                               //unsuccessful logout:
                 alert("error status: ", logoutResponse.status,"\ntry to logout again!");

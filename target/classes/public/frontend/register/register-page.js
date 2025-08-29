@@ -2,9 +2,9 @@
  * This script defines the registration functionality for the Registration page in the Recipe Management Application.
  */
 
-const BASE_URL = "http://localhost:8081"; // backend URL
+//const BASE_URL = "http://localhost:8081"; // backend URL
 
-//const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+const BASE_URL = "https://8081-hipsterindi-hipsterindi-ornopet9gx5.ws-us121.gitpod.io"; // test
 
 
 /* 

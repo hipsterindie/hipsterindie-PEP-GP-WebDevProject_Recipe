@@ -2,9 +2,9 @@
  * This script handles the login functionality for the Recipe Management Application.
  * It manages user authentication by sending login requests to the server and handling responses.
 */
-const BASE_URL = "http://localhost:8081"; // backend URL
+//const BASE_URL = "http://localhost:8081"; // backend URL
 
-//const BASE_URL = "https://8081-hipsterindi-hipsterindi-btlziuavoza.ws-us121.gitpod.io"; // test
+const BASE_URL = "https://8081-hipsterindi-hipsterindi-ornopet9gx5.ws-us121.gitpod.io"; // test
 
 
 /* 
@@ -111,11 +111,11 @@ async function processLogin() {
             sessionStorage.setItem("is-admin", isAdmin);
             // TODO: Optionally show the logout button if applicable
     
-            logoutButton.hidden = false;
+            logoutButton.style.visibility = "visible";
             
             // DONE: Add a small delay (e.g., 500ms) using setTimeout before redirecting
             // - Use window.location.href to redirect to the recipe page
-            setTimeout(() => {window.location.href = `${BASE_URL}/frontend/recipe/recipe-page.html`},500);
+            setTimeout(() => {window.location.href = `../recipe/recipe-page.html`},500);
             
             
         }
@@ -137,7 +137,7 @@ async function processLogin() {
         // DONE: Handle any network or unexpected errors
         // - Log the error and alert the user
         console.error("An error occured during login: ", error);
-        alert("there was an error... try again!");
+        alert("there was an error... try again!",error);
     }
     
 }
